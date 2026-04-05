@@ -151,7 +151,7 @@ This project can be migrated to Google Cloud Platform:
 | --------- | -------------------------------- |
 | Frontend  | Cloud Storage / Firebase Hosting |
 | Backend   | Cloud Run                        |
-| Database  | Cloud SQL (MySQL)                |
+| Database  | Cloud SQL (MySQL)/Firebase       |
 -------------------------------------------------------------------------------------------------------------------------------
 
 ## 🔄 Migration Changes Required
