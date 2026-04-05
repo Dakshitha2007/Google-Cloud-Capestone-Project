@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>College Event Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e8e4e4;
+        }
+
+        .container {
+            width: 400px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 50px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Event Registration</h2>
+
+    <!-- Form connects to backend (change action to your backend file) -->
+    <form id="form">
+
+    <label>First Name:</label>
+    <input type="text" id="first_name" required>
+
+    <label>Last Name:</label>
+    <input type="text" id="last_name" required>
+
+    <label>Email:</label>
+    <input type="email" id="email" required>
+
+    <label>Phone Number:</label>
+    <input type="tel" name="phone" required pattern="[0-9]{10}"
+     maxlength="10" placeholder="Enter 10-digit number">
+
+    <label>College Name:</label>
+    <input type="text" id="college" required>
+
+    <label>Year:</label>
+    <select id="year" required>
+        <option value="">Select Year</option>
+        <option>1st Year</option>
+        <option>2nd Year</option>
+        <option>3rd Year</option>
+        <option>4th Year</option>
+    </select>
+
+    <label>Event:</label>
+    <select id="event" required>
+        <option value="">Select Event</option>
+        <option>Hackathon</option>
+        <option>Technical Quiz</option>
+        <option>Coding Competition</option>
+        <option>Robotics Workshop</option>
+        <option>Cultural Fest</option>
+    </select>
+
+    <label>Gender:</label>
+    <select id="gender">
+        <option value="">Select</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+    </select>
+
+    <button type="submit">Register</button>
+    <p id="message" style="text-align:center;
+       color:green; font-weight:bold;"></p>
+</form>
+
+</div>
+
+<script>
+document.getElementById("form").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const formData = {
+        first_name: document.getElementById("first_name").value,
+        last_name: document.getElementById("last_name").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementsByName("phone")[0].value,
+        college: document.getElementById("college").value,
+        year: document.getElementById("year").value,
+        event: document.getElementById("event").value,
+        gender: document.getElementById("gender").value
+    };
+
+    if (!/^[0-9]{10}$/.test(formData.phone)) {
+        document.getElementById("message").innerText = "Phone must be 10 digits";
+        return;
+    }
+
+    const response = await fetch("http://localhost:3000/register", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+    });
+
+    const result = await response.text();
+    document.getElementById("message").innerText = result;
+});
+</script>
+
+</body>
+</html>
