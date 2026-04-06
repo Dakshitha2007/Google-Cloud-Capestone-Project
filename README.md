@@ -129,7 +129,7 @@ Server running on http://localhost:3000
 * Form validation (10-digit phone number & proper email format)
 * Data stored in MySQL database
 * Real-time success/error message display
-* No page reload when registration is successfull(AJAX / Fetch API)
+* No page reload when registration is successfull
 -------------------------------------------------------------------------------------------------------------------------------
 
 ## 🧪 Testing
